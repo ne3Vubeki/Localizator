@@ -19,6 +19,8 @@ export class QuppyTreeComponent implements OnInit {
     @Input() isChange: boolean;
     @Input() items: any[];
     @Input() json: any;
+    @Input() locale: string;
+    @Input() loader: boolean;
 
     @Output() qpChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 

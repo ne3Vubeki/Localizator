@@ -8,20 +8,30 @@
     </div>
 </div>
 <mat-nav-list>
+    <h3 mat-subheader>Аккаунт</h3>
+    <mat-list-item disableRipple>
+        <mat-icon mat-list-icon>account_circle</mat-icon>
+        <h4 mat-line>{{_api?.user.email}}</h4>
+    </mat-list-item>
+    <a mat-list-item href="#" (click)="_api.logout()">
+        <mat-icon mat-list-icon>exit_to_app</mat-icon>
+        <h4 mat-line>Выйти</h4>
+    </a>
+    <mat-divider></mat-divider>
     <h3 mat-subheader>Действия</h3>
     <a mat-list-item href="#"
        (click)="save()"
        [ngStyle]="{ opacity: isChange ? 1 : .31 }"
        [disableRipple]="!isChange">
         <mat-icon mat-list-icon>cloud_upload</mat-icon>
-        <h4 mat-line>Сохранить файл</h4>
+        <h4 mat-line>Сохранить</h4>
     </a>
     <a mat-list-item href="#"
        (click)="getFile()"
        [ngStyle]="{ opacity: isChange ? .3 : 1 }"
        [disableRipple]="isChange">
         <mat-icon mat-list-icon>cloud_download</mat-icon>
-        <h4 mat-line>Выгрузить файл</h4>
+        <h4 mat-line>Выгрузить json</h4>
     </a>
     <a mat-list-item href="#"
        (click)="getFiles()"
@@ -41,14 +51,6 @@
             Шаблон
             <span style="float: right">{{templateLang}}</span>
         </h4>
-    </a>
-    <a mat-list-item href="#">
-        <mat-icon mat-list-icon>account_circle</mat-icon>
-        <h4 mat-line>Аккаунт</h4>
-    </a>
-    <a mat-list-item href="#" (click)="_api.logout()">
-        <mat-icon mat-list-icon>exit_to_app</mat-icon>
-        <h4 mat-line>Выйти</h4>
     </a>
 </mat-nav-list>
 <mat-menu #menu="matMenu" xPosition="after">

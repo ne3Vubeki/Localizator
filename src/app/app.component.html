@@ -18,6 +18,8 @@
                         (qpLocale)="loadLocale($event.value)"
                         [sidenav]="sidenav"></app-quppy-menu>
         <app-quppy-tree [items]="itemsSrc"
+                        [locale]="locale"
+                        [loader]="isLoad"
                         [json]="originJson"
                         (qpChange)="isChange = $event"></app-quppy-tree>
     </mat-sidenav-content>

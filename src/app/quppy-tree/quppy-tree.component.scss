@@ -14,8 +14,13 @@
       }
     }
 
+    &.danger {
+      background-color: rgba(255, 0, 0, 0.1);
+    }
+
     .quppy-col {
       padding: 5px;
+
 
       p {
         width: 100%;

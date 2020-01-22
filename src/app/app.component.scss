@@ -25,7 +25,7 @@ mat-sidenav-container {
         text-align: left;
         overflow: hidden;
         text-overflow: ellipsis;
-        padding: 12px 10px 0;
+        padding: 7px 10px 0;
         font-weight: bold;
       }
 
@@ -55,5 +55,15 @@ mat-sidenav-container {
         }
       }
     }
+  }
+}
+
+mat-dialog-container {
+  position: relative;
+
+  .mat-progress-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0
   }
 }

@@ -14,16 +14,7 @@ import {ApiService} from "./services/api/api.service";
 import {QuppySidebarComponent} from "./quppy-sidebar/quppy-sidebar.component";
 import {QuppyLoginComponent} from "./quppy-login/quppy-login.component";
 import {ReactiveFormsModule} from "@angular/forms";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAE_VkGU60kdO0YuwSM0XbwWh97JiV1kZE",
-    authDomain: "quppylocalization.firebaseapp.com",
-    databaseURL: "https://quppylocalization.firebaseio.com",
-    projectId: "quppylocalization",
-    storageBucket: "quppylocalization.appspot.com",
-    messagingSenderId: "1087556349379",
-    appId: "1:1087556349379:web:ba34debd3947fd09e2a176"
-};
+import {FIREBASE_CONFIG} from "./constants";
 
 @NgModule({
     declarations: [
@@ -38,7 +29,7 @@ const firebaseConfig = {
         BrowserModule,
         BrowserAnimationsModule,
         MaterialModule,
-        AngularFireModule.initializeApp(firebaseConfig),
+        AngularFireModule.initializeApp(FIREBASE_CONFIG),
         AngularFireStorageModule,
         AngularFireAuthModule,
         ReactiveFormsModule

@@ -8,10 +8,10 @@ export class ApiService {
 
     public locales: any[];
     public isAuth: boolean;
-
-    private authParams: any;
     public langTypeTemp: string;
     public langTypeEdit: string;
+    public user: any;
+
     private langTempJson: any;
     private langEditJson: any;
 
@@ -21,6 +21,11 @@ export class ApiService {
         this._auth.user.subscribe(res => {
             this.isAuth = !!res
             this.authState.emit(this.isAuth);
+            if(!!res) {
+                          this.user = res;
+            } else {
+                delete this.user;
+            }
         });
         this.locales = 'Русский.ru,Английский.en,Французкий.fr,Испанский.es,Итальянский.it,Японский.ja,Корейский.ko,Китайский.zh'.split(',').map(loc => {
             const locale = loc.split('.');
@@ -34,19 +39,11 @@ export class ApiService {
     authState: EventEmitter<any> = new EventEmitter<any>();
 
     login(email, pass) {
-        return this._auth.auth.signInWithEmailAndPassword(email, pass)
-            .then(() => {
-                this.isAuth = true;
-                this.authState.emit(this.isAuth);
-            });
+        return this._auth.auth.signInWithEmailAndPassword(email, pass);
     }
 
     logout() {
-        this._auth.auth.signOut()
-            .then(() => {
-                this.isAuth = false;
-                this.authState.emit(this.isAuth);
-            });
+        this._auth.auth.signOut();
     }
 
     private async getJson(type: string = 'ru') {

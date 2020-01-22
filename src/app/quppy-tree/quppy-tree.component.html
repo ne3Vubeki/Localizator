@@ -5,6 +5,7 @@
 <ng-template #itemRepeat let-items="items" let-dist="dist">
     <div *ngFor="let item of items; let ind = index">
         <div class="quppy-row"
+             [class.danger]="!item.dist && !!locale && !item.children && !loader"
              [class.even]="ind % 2 == 0 && !item.children"
              [class.odd]="ind % 2 != 0">
             <h1 *ngIf="!item.value">{{item.key}}</h1>

@@ -19,6 +19,7 @@ export class QuppyLoginComponent {
     private error: any;
     private hide: boolean = true;
     private options: FormGroup;
+    private isLoad: boolean = false;
 
 
     constructor(
@@ -34,12 +35,15 @@ export class QuppyLoginComponent {
 
     login(): void {
         delete this.error;
+        this.isLoad = true;
         this._api.login(this.options.value.email, this.options.value.password)
             .then(res => {
+                this.isLoad = false;
                 this._dialogRef.close()
             })
             .catch(err => {
                 console.log('Login:', err);
+                this.isLoad = false;
                 this.error = err;
             });
     }
