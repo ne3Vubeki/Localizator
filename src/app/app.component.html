@@ -1,0 +1,24 @@
+<mat-sidenav-container *ngIf="isAuth">
+    <mat-sidenav #sidenav
+                 mode="over"
+                 position="end">
+        <app-quppy-sidebar
+                (qpSave)="saveLocale()"
+                (qpLocale)="changeTemplate($event.value);sidenav.close();locale = ''"
+                [templateLang]="templateLang"
+                [isChange]="isChange"
+                [sidenav]="sidenav"></app-quppy-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-quppy-menu [isChange]="isChange"
+                        [templateLang]="templateLang"
+                        [loader]="isLoad"
+                        [value]="locale"
+                        (qpSave)="saveLocale()"
+                        (qpLocale)="loadLocale($event.value)"
+                        [sidenav]="sidenav"></app-quppy-menu>
+        <app-quppy-tree [items]="itemsSrc"
+                        [json]="originJson"
+                        (qpChange)="isChange = $event"></app-quppy-tree>
+    </mat-sidenav-content>
+</mat-sidenav-container>

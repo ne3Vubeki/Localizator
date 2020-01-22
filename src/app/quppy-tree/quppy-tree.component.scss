@@ -1,0 +1,48 @@
+.quppy-table {
+  .quppy-row {
+    &.even {
+      background-color: aliceblue;
+
+      span {
+        border-left: 2px solid white
+      }
+    }
+
+    &.odd {
+      span {
+        border-left: 2px solid aliceblue
+      }
+    }
+
+    .quppy-col {
+      padding: 5px;
+
+      p {
+        width: 100%;
+        margin: 2px 0;
+        white-space: normal;
+        font-style: italic;
+        color: #777;
+      }
+
+      textarea {
+        width: 100%;
+        height: 100%;
+        font-size: 16px;
+        min-height: 16px;
+        background: none transparent;
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        resize: vertical;
+        line-height: 1.2;
+        font-style: italic;
+        letter-spacing: .08px;
+        word-spacing: 2px;
+
+        &.changed {
+          color: red;
+        }
+      }
+    }
+  }
+}

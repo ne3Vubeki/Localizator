@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Авторизация</h1>
+<div mat-dialog-content>
+    <form [formGroup]="options">
+        <mat-form-field>
+            <input matInput placeholder="Email" formControlName="email" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
+</div>
+<mat-hint *ngIf="!error">Введите почту и пароль для входа</mat-hint>
+<mat-error *ngIf="!!error">
+    {{error.message}}
+</mat-error>
+<div mat-dialog-actions align="center">
+    <button mat-stroked-button color="primary" (click)="login()">Войти</button>
+</div>

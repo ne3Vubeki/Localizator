@@ -1,0 +1,109 @@
+app-quppy-menu {
+  .menu-wrapper {
+    position: relative;
+    width: 100%;
+    display: block;
+    background-color: #462E87;
+
+    mat-progress-bar{
+      position: absolute;
+      left: 0;
+      top: 100%
+    }
+
+    .quppy-table {
+      overflow: hidden;
+    }
+
+    .quppy-row {
+      padding: 0 !important;
+
+      .quppy-label {
+        flex: 0 0 170px !important;
+      }
+    }
+
+
+    .mat-form-field > .mat-form-field-wrapper {
+      padding-bottom: 0;
+      color: white;
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-label,
+    .mat-form-field.mat-focused .mat-form-field-label,
+    .mat-form-field .mat-select.mat-select-disabled .mat-select-arrow,
+    .mat-form-field-appearance-legacy .mat-select-empty.mat-select-disabled ~ .mat-form-field-label-wrapper .mat-form-field-label,
+    .mat-select-disabled .mat-select-value {
+      color: #777;
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-ripple,
+    .mat-form-field.mat-focused .mat-form-field-ripple,
+    .mat-form-field-underline {
+      bottom: 0;
+      display: none;
+      color: white;
+      background-color: white;
+    }
+
+    .mat-form-field-appearance-legacy .mat-select-empty ~ .mat-form-field-label-wrapper .mat-form-field-label,
+    .mat-form-field.mat-focused.mat-primary .mat-select-arrow,
+    .mat-select-arrow,
+    .mat-select-value {
+      color: white;
+    }
+
+    .flat-button {
+      position: relative;
+      border: none;
+      outline: none;
+
+      &:active {
+        opacity: .5;
+        transform: scale(.8);
+      }
+
+      &:disabled {
+        opacity: .2;
+
+        &:active {
+          opacity: .2;
+          transform: scale(1);
+        }
+      }
+
+      &.red {
+        background-color: coral;
+      }
+
+      &.yellow {
+        background-color: orange;
+      }
+
+      &.blue {
+        background-color: cornflowerblue;
+      }
+
+      &.green {
+        background-color: mediumseagreen;
+      }
+
+      .mat-icon {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+      }
+
+      span {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+      }
+    }
+  }
+}
+

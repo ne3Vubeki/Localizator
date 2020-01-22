@@ -1,0 +1,29 @@
+<div class="quppy-table">
+    <ng-container *ngTemplateOutlet="itemRepeat; context: { items: items }"></ng-container>
+</div>
+
+<ng-template #itemRepeat let-items="items" let-dist="dist">
+    <div *ngFor="let item of items; let ind = index">
+        <div class="quppy-row"
+             [class.even]="ind % 2 == 0 && !item.children"
+             [class.odd]="ind % 2 != 0">
+            <h1 *ngIf="!item.value">{{item.key}}</h1>
+            <label class="quppy-label" *ngIf="!!item.value">{{item.key}}: </label>
+            <span class="quppy-col" *ngIf="!!item.value"><p>{{item.value}}</p></span>
+            <span class="quppy-col" *ngIf="!!item.value">
+                <textarea (input)="change($event, item)"
+                          [value]="item.dist || ''"
+                          [class.changed]="changeVerify(item.origin)"></textarea>
+            </span>
+            <span class="quppy-col small" *ngIf="!!item.value">
+                <button mat-icon-button color="primary"
+                        *ngIf="changeVerify(item.origin)"
+                        (click)="restore($event, item)"
+                        aria-label="Убрать изменения">
+                    <mat-icon>undo</mat-icon>
+                </button>
+            </span>
+        </div>
+        <ng-container *ngTemplateOutlet="itemRepeat; context: { items: item.children }"></ng-container>
+    </div>
+</ng-template>

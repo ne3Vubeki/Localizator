@@ -1,0 +1,59 @@
+<div class="menu-wrapper">
+    <div class="quppy-table">
+        <div class="quppy-row">
+            <span class="quppy-col">
+                <div class="quppy-col-bottom">Меню</div>
+            </span>
+        </div>
+    </div>
+</div>
+<mat-nav-list>
+    <h3 mat-subheader>Действия</h3>
+    <a mat-list-item href="#"
+       (click)="save()"
+       [ngStyle]="{ opacity: isChange ? 1 : .31 }"
+       [disableRipple]="!isChange">
+        <mat-icon mat-list-icon>cloud_upload</mat-icon>
+        <h4 mat-line>Сохранить файл</h4>
+    </a>
+    <a mat-list-item href="#"
+       (click)="getFile()"
+       [ngStyle]="{ opacity: isChange ? .3 : 1 }"
+       [disableRipple]="isChange">
+        <mat-icon mat-list-icon>cloud_download</mat-icon>
+        <h4 mat-line>Выгрузить файл</h4>
+    </a>
+    <a mat-list-item href="#"
+       (click)="getFiles()"
+       [ngStyle]="{ opacity: isChange ? .3 : 1 }"
+       [disableRipple]="isChange">
+        <mat-icon mat-list-icon>get_app</mat-icon>
+        <h4 mat-line>Выгрузить все</h4>
+    </a>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Настройки</h3>
+    <a mat-list-item
+       [matMenuTriggerFor]="!isChange ? menu : null"
+       [ngStyle]="{ opacity: isChange ? .3 : 1 }"
+       [disableRipple]="isChange">
+        <mat-icon mat-list-icon>spellcheck</mat-icon>
+        <h4 mat-line>
+            Шаблон
+            <span style="float: right">{{templateLang}}</span>
+        </h4>
+    </a>
+    <a mat-list-item href="#">
+        <mat-icon mat-list-icon>account_circle</mat-icon>
+        <h4 mat-line>Аккаунт</h4>
+    </a>
+    <a mat-list-item href="#" (click)="_api.logout()">
+        <mat-icon mat-list-icon>exit_to_app</mat-icon>
+        <h4 mat-line>Выйти</h4>
+    </a>
+</mat-nav-list>
+<mat-menu #menu="matMenu" xPosition="after">
+    <button mat-menu-item
+            *ngFor="let locale of locales"
+            (click)="qpLocale.emit(locale)"
+            [disabled]="locale.value === templateLang">{{locale.title}}</button>
+</mat-menu>

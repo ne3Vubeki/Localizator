@@ -1,0 +1,33 @@
+<div class="menu-wrapper">
+    <div class="quppy-table">
+        <div class="quppy-row">
+            <label class="quppy-label"></label>
+            <span class="quppy-col">
+                <div class="quppy-col-bottom">Шаблон: {{getLocale(templateLang).title}}</div>
+            </span>
+            <span class="quppy-col">
+                <mat-form-field>
+                  <mat-label>Выберите язык</mat-label>
+                  <mat-select (selectionChange)="qpLocale.emit($event)" [disabled]="isChange" [value]="value">
+                    <mat-option *ngFor="let locale of locales" [value]="locale.value">
+                      {{locale.title}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </span>
+            <span class="quppy-col small">
+                <button title="Сохранить" class="flat-button blue"
+                        (click)="save()"
+                        [disabled]="!isChange">
+                    <mat-icon>cloud_upload</mat-icon>
+                    <span>Save</span>
+                </button>
+                <button title="Меню" class="flat-button red" (click)="sidenav.toggle()">
+                    <mat-icon>menu</mat-icon>
+                    <span>Menu</span>
+                </button>
+            </span>
+        </div>
+    </div>
+    <mat-progress-bar mode="query" *ngIf="loader"></mat-progress-bar>
+</div>

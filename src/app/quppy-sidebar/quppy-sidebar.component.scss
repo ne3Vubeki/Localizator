@@ -1,0 +1,25 @@
+app-quppy-sidebar {
+  .menu-wrapper {
+    width: 250px;
+    display: block;
+    background-color: coral;
+    height: 45px;
+    padding: 0 15px;
+
+    .quppy-table {
+      overflow: hidden;
+    }
+
+    .quppy-row {
+      padding: 0;
+
+      .quppy-col {
+        .quppy-col-bottom {
+          top: 100%
+        }
+      }
+    }
+
+  }
+}
+
