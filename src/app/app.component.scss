@@ -8,6 +8,17 @@ mat-sidenav-container {
     }
   }
 
+  app-quppy-menu {
+    max-height: 45px;
+    height: 45px;
+    display: block;
+  }
+
+  app-quppy-tree {
+    height: calc(100% - 45px);
+    display: block;
+  }
+
   .quppy-table {
     width: 100%;
     height: 100%;

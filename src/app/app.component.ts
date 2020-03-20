@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
   constructor(private _api: ApiService,
               private _dialog: MatDialog) {
-    this.templateLang = 'ru';
+    this.templateLang = 'en';
   }
 
   ngOnInit() {
@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
     this._api.getJsonForEdit(locale)
         .then(res => {
           this.originJson = res;
-          this.itemsSrc = this.parseDistToSrc(this.itemsSrc, res);
+          this.itemsSrc = this.parseDistToSrc(this.itemsSrc, this.originJson);
           this.isChange = IS_NOT_CHANGE_LOCALE;
           this.isLoad = false;
         });
@@ -104,8 +104,15 @@ export class AppComponent implements OnInit {
     if (arr.length) {
       arr.map(item => {
         if (item.children) {
+          if(!json || !json[item.key]) {
+            json = json || {};
+            json[item.key] = {};
+          }
           this.parseDistToSrc(item.children, json[item.key]);
         } else {
+          if(!json[item.key]) {
+            json[item.key] = '';
+          }
           item.dist = json[item.key];
           delete item.origin;
         }

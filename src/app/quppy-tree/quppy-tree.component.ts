@@ -37,7 +37,7 @@ export class QuppyTreeComponent implements OnInit {
                     return this.parseChanges(item.children, json[item.key]);
                 } else {
                     const isChange = typeof item.origin !== 'undefined';
-                    isChange ? json[item.key] = item.dist : null;
+                    isChange ? json[item.key] = item.dist.trim() : null;
                     return isChange;
                 }
             });

@@ -27,7 +27,7 @@ export class ApiService {
                 delete this.user;
             }
         });
-        this.locales = 'Русский.ru,Английский.en,Французкий.fr,Испанский.es,Итальянский.it,Японский.ja,Корейский.ko,Китайский.zh'.split(',').map(loc => {
+        this.locales = 'Русский.ru,Английский.en,Немецкий.de,Французкий.fr,Испанский.es,Итальянский.it,Японский.ja,Корейский.ko,Китайский.zh'.split(',').map(loc => {
             const locale = loc.split('.');
             return {
                 title: locale[0],
@@ -54,7 +54,8 @@ export class ApiService {
 
     private setJson(type: string = 'ru', json: any) {
         const ref = this._storage.ref(type + '.json');
-        ref.putString(JSON.stringify(json, null, '\t'));
+        const jsonStr = JSON.stringify(json, null, '\t').replace('\n', '');
+        ref.putString(jsonStr);
     }
 
     async download(type: string = 'ru') {
@@ -65,6 +66,7 @@ export class ApiService {
                 let dataType = response.type;
                 let binaryData = [];
                 let downloadLink = document.createElement('a');
+                console.log(response);
                 binaryData.push(response);
                 downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
                 downloadLink.setAttribute('download', type + '.json');
