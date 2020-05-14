@@ -50,8 +50,8 @@ export class AppComponent implements OnInit {
         });
   }
 
-  changeTemplate(lang) {
-    this.templateLang = lang;
+  changeTemplate(lang?) {
+    this.templateLang = lang || this.templateLang;
     this.isLoad = true;
     this._api.getJsonForTemplate(this.templateLang)
         .then(res => {

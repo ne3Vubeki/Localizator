@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
 import {ApiService} from "../services/api/api.service";
-import {IS_NOT_CHANGE_LOCALE} from "../constants";
+import {STORAGE_REFS} from "../constants";
 
 @Component({
     selector: 'app-quppy-sidebar',
@@ -17,11 +17,16 @@ export class QuppySidebarComponent implements OnInit {
 
     @Output() qpSave: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() qpLocale: EventEmitter<any> = new EventEmitter<any>();
+    @Output() qpFolder: EventEmitter<any> = new EventEmitter<any>();
 
     locales: any[];
+    folders: any[];
+    folder: any;
 
     constructor(private _api: ApiService) {
         this.locales = this._api.locales;
+        this.folders = STORAGE_REFS;
+        this.folder = this.folders[0];
     }
 
     ngOnInit() {
@@ -48,6 +53,12 @@ export class QuppySidebarComponent implements OnInit {
             this.qpSave.emit();
             this.sidenav.close();
         }
+    }
+
+    changeFolder(folder) {
+        this.folder = folder;
+        this._api.setPath(folder.ref);
+        this.qpFolder.emit(folder);
     }
 
 }

@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from "@angular/core";
-import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFireAuth } from '@angular/fire/auth';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {AngularFireStorage} from '@angular/fire/storage';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class ApiService {
@@ -14,6 +14,7 @@ export class ApiService {
 
     private langTempJson: any;
     private langEditJson: any;
+    private _path: string = '';
 
     constructor(private _storage: AngularFireStorage,
                 private _http: HttpClient,
@@ -21,8 +22,8 @@ export class ApiService {
         this._auth.user.subscribe(res => {
             this.isAuth = !!res
             this.authState.emit(this.isAuth);
-            if(!!res) {
-                          this.user = res;
+            if (!!res) {
+                this.user = res;
             } else {
                 delete this.user;
             }
@@ -46,35 +47,43 @@ export class ApiService {
         this._auth.auth.signOut();
     }
 
+    setPath(path) {
+        this._path = path;
+    }
+
+    getPath() {
+        return this._path;
+    }
+
     private async getJson(type: string = 'ru') {
-        const ref = this._storage.ref(type + '.json');
+        const ref = this._storage.ref(this._path + type + '.json');
         const url = await ref.getDownloadURL().toPromise();
         return this._http.get(url).toPromise();
     }
 
     private setJson(type: string = 'ru', json: any) {
-        const ref = this._storage.ref(type + '.json');
+        const ref = this._storage.ref(this._path + type + '.json');
         const jsonStr = JSON.stringify(json, null, '\t').replace('\n', '');
         ref.putString(jsonStr);
     }
 
     async download(type: string = 'ru') {
-        const ref = this._storage.ref(type + '.json');
+        const ref = this._storage.ref(this._path + type + '.json');
         const url = await ref.getDownloadURL().toPromise();
-        this._http.get(url,{responseType: 'blob' as 'json'})
+        this._http.get(url, {responseType: 'blob' as 'json'})
             .subscribe((response: any) => {
-                let dataType = response.type;
-                let binaryData = [];
-                let downloadLink = document.createElement('a');
-                console.log(response);
-                binaryData.push(response);
-                downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-                downloadLink.setAttribute('download', type + '.json');
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                downloadLink.parentNode.removeChild(downloadLink);
-            }
-        )
+                    let dataType = response.type;
+                    let binaryData = [];
+                    let downloadLink = document.createElement('a');
+                    console.log(response);
+                    binaryData.push(response);
+                    downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+                    downloadLink.setAttribute('download', type + '.json');
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    downloadLink.parentNode.removeChild(downloadLink);
+                }
+            )
     }
 
     getLangTemplate(type): string {

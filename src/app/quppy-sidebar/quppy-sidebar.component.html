@@ -23,7 +23,7 @@
        (click)="save()"
        [ngStyle]="{ opacity: isChange ? 1 : .31 }"
        [disableRipple]="!isChange">
-        <mat-icon mat-list-icon>cloud_upload</mat-icon>
+        <mat-icon mat-list-icon>save</mat-icon>
         <h4 mat-line>Сохранить</h4>
     </a>
     <a mat-list-item href="#"
@@ -43,7 +43,17 @@
     <mat-divider></mat-divider>
     <h3 mat-subheader>Настройки</h3>
     <a mat-list-item
-       [matMenuTriggerFor]="!isChange ? menu : null"
+       [matMenuTriggerFor]="!isChange ? menuFolder : null"
+       [ngStyle]="{ opacity: isChange ? .3 : 1 }"
+       [disableRipple]="isChange">
+        <mat-icon mat-list-icon>folder_open</mat-icon>
+        <h4 mat-line>
+            Раздел
+            <span style="float: right">{{folder.title}}</span>
+        </h4>
+    </a>
+    <a mat-list-item
+       [matMenuTriggerFor]="!isChange ? menuLang : null"
        [ngStyle]="{ opacity: isChange ? .3 : 1 }"
        [disableRipple]="isChange">
         <mat-icon mat-list-icon>spellcheck</mat-icon>
@@ -53,9 +63,15 @@
         </h4>
     </a>
 </mat-nav-list>
-<mat-menu #menu="matMenu" xPosition="after">
+<mat-menu #menuLang="matMenu" xPosition="after">
     <button mat-menu-item
             *ngFor="let locale of locales"
             (click)="qpLocale.emit(locale)"
             [disabled]="locale.value === templateLang">{{locale.title}}</button>
+</mat-menu>
+<mat-menu #menuFolder="matMenu" xPosition="after">
+    <button mat-menu-item
+            *ngFor="let fold of folders"
+            (click)="changeFolder(fold)"
+            [disabled]="fold.ref === folder.ref">{{fold.title}}</button>
 </mat-menu>

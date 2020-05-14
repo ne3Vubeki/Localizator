@@ -9,3 +9,13 @@ export const FIREBASE_CONFIG = {
     messagingSenderId: "1089322147225",
     appId: "1:1089322147225:web:24020c6627ab22e87d8708"
 };
+export const STORAGE_REFS = [
+    {
+        title: 'Main',
+        ref: ''
+    },
+    {
+        title: 'Device',
+        ref: 'device_translate/'
+    }
+];

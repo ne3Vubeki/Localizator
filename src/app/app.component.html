@@ -5,6 +5,7 @@
         <app-quppy-sidebar
                 (qpSave)="saveLocale()"
                 (qpLocale)="changeTemplate($event.value);sidenav.close();locale = ''"
+                (qpFolder)="changeTemplate();sidenav.close();locale = ''"
                 [templateLang]="templateLang"
                 [isChange]="isChange"
                 [sidenav]="sidenav"></app-quppy-sidebar>
