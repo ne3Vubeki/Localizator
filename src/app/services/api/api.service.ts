@@ -28,7 +28,7 @@ export class ApiService {
                 delete this.user;
             }
         });
-        this.locales = 'Русский.ru,Английский.en,Немецкий.de,Французкий.fr,Испанский.es,Итальянский.it,Японский.ja,Корейский.ko,Китайский.zh'.split(',').map(loc => {
+        this.locales = 'Русский.ru,Английский.en,Немецкий.de,Французкий.fr,Испанский.es,Итальянский.it,Португальский.pt,Турецкий.tr,Эстонский.et,Японский.ja,Корейский.ko,Китайский.zh'.split(',').map(loc => {
             const locale = loc.split('.');
             return {
                 title: locale[0],
@@ -70,7 +70,7 @@ export class ApiService {
     async download(type: string = 'ru') {
         const ref = this._storage.ref(this._path + type + '.json');
         const url = await ref.getDownloadURL().toPromise();
-        this._http.get(url, {responseType: 'blob' as 'json'})
+        await this._http.get(url, {responseType: 'blob' as 'json'})
             .subscribe((response: any) => {
                     let dataType = response.type;
                     let binaryData = [];
@@ -111,7 +111,7 @@ export class ApiService {
     }
 
     getFiles(langs) {
-        langs.map(lang => this.download(lang));
+        langs.map(async (lang) => await this.download(lang));
     }
 
     saveJson() {
